@@ -28,7 +28,8 @@
 // https://people.csail.mit.edu/rivest/Md5.c
 // https://tools.ietf.org/html/rfc1321
 
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
+//#![cfg_attr(not(feature = "std"), no_std)]
 
 //#[cfg(feature = "std")]
 //use std as core;
@@ -39,6 +40,13 @@
 //
 //#[cfg(feature = "std")]
 //use core::io;
+
+#[cfg(feature = "std")]
+#[macro_use]
+extern crate sgx_tstd as std;
+
+#[cfg(feature = "std")]
+use std::prelude::v1::*;
 
 #[cfg(not(feature = "std"))]
 use core::{convert, fmt, ops};
@@ -373,9 +381,18 @@ fn transform(state: &mut [u32; 4], input: &[u32; 16]) {
     state[3] = add!(state[3], d);
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
+//#[cfg(test)]
+#[cfg(feature = "with-testing")]
+pub mod tests {
+    use std::prelude::v1::*;
+
+    use testing::*;
+
+    pub fn do_rsgx_tests() -> usize {
+        run_tests!(compute, index, overflow_count)
+    }
+
+    //#[test]
     fn compute() {
         let inputs = [
             "",
@@ -402,7 +419,7 @@ mod tests {
         }
     }
 
-    #[test]
+    //#[test]
     fn index() {
         let mut digest = crate::compute(b"abc");
         assert_eq!(digest[0], 0x90);
@@ -410,7 +427,7 @@ mod tests {
         assert_eq!(&mut digest[0], &mut 0x90);
     }
 
-    #[test]
+    //#[test]
     fn overflow_count() {
         use std::io::prelude::Write;
         let data = vec![0; 8 * 1024 * 1024];
