@@ -1,5 +1,7 @@
 # MD5 [![Package][package-img]][package-url] [![Documentation][documentation-img]][documentation-url] [![Build][build-img]][build-url]
 
+![rsgx](https://github.com/sammyne/md5-rs/workflows/rsgx/badge.svg?branch=rsgx1.1.1)
+
 The package provides the [MD5] hash function.
 
 ## Example
