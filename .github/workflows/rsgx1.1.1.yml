@@ -1,10 +1,10 @@
-name: rsgx
+name: rsgx1.1.1
 
 on:
   push:
-    branches: [ 'rsgx**' ]
+    branches: [ 'rsgx1.1.1' ]
   pull_request:
-    branches: [ 'rsgx**' ]
+    branches: [ 'rsgx1.1.1' ]
 
 jobs:
   test:
