@@ -37,6 +37,15 @@ jobs:
       with:
         path: ~/.cargo/git
         key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.toml') }}
+    - name: Pull in the cargo-teaclave plugin
+      run: |
+        export export GO_VERSION=1.14.3                                     &&
+        wget "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz"  &&
+        tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz           &&
+        ln -sf /usr/local/go/bin/* /usr/bin                                 &&
+        go version                                                          &&
+        go get -u -v github.com/sammyne/cargo-teaclave                      &&
+        mv $(go env GOPATH)/bin/cargo-teaclave ~/.cargo/bin/
     - name: Run tests
       run: |
         . ~/.cargo/env && 
