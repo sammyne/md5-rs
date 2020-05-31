@@ -44,15 +44,11 @@ jobs:
         tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz           &&
         ln -sf /usr/local/go/bin/* /usr/bin                                 &&
         go version                                                          &&
-        go get -u -v github.com/sammyne/cargo-teaclave                      &&
+        go get -u -v github.com/sammyne/cargo-teaclave@master               &&
         mv $(go env GOPATH)/bin/cargo-teaclave ~/.cargo/bin/
     - name: Run tests
       run: |
         . ~/.cargo/env && 
         . /opt/sgxsdk/environment && 
-        mkdir tests/sgx/build &&
-        cd tests/sgx/build &&
-        cmake .. && 
-        make &&
-        make test-sgx
+        cargo teaclave test --crate .
       shell: bash
