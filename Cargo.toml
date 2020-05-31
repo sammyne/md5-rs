@@ -25,15 +25,18 @@ edition = "2018"
 [features]
 default = ["std"]
 std = ["sgx_tstd"]
-with-testing = ["sgx_tstd", "testing"]
+with-testing = ["inventory", "sgx_tstd", "testing"]
 
-[dependencies.testing]
-branch = "rsgx1.1.1"
-git = "https://github.com/sammyne/testing-rsgx"
-optional = true
+[dependencies]
+inventory   = { version = "0.1.6", optional = true }
 
 [dependencies.sgx_tstd]
-features = ["thread"]
-git = "https://github.com/apache/teaclave-sgx-sdk"
-optional = true
-rev = "v1.1.1"
+features    = ["thread"]
+git         = "https://github.com/apache/teaclave-sgx-sdk"
+optional    = true
+rev         = "v1.1.2"
+
+[dependencies.testing]
+branch      = "rsgx1.1.2"
+git         = "https://github.com/sammyne/teaclave-testing"
+optional    = true

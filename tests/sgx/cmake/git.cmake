@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 ExternalProject_Add(teaclave-sgx-sdk-assets
     GIT_REPOSITORY https://github.com/sammyne/teaclave-sgx-sdk-assets
-    GIT_TAG rsgx1.1.1
+    GIT_TAG rsgx1.1.2
     GIT_PROGRESS true
     SOURCE_DIR ${PROJECT_SOURCE_DIR}/third_party/teaclave-sgx-sdk-assets
     UPDATE_DISCONNECTED true

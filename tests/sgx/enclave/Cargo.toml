@@ -10,7 +10,7 @@ crate-type = ["staticlib"]
 default = []
 
 [dependencies]
-sgx_tstd  = { git = "https://github.com/apache/teaclave-sgx-sdk", rev = "v1.1.1" }
+sgx_tstd  = { git = "https://github.com/apache/teaclave-sgx-sdk", rev = "v1.1.2" }
 
 [dependencies.wheel]
 package = "md5"

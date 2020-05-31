@@ -386,13 +386,11 @@ fn transform(state: &mut [u32; 4], input: &[u32; 16]) {
 pub mod tests {
     use std::prelude::v1::*;
 
-    use testing::*;
+    use testing::{generate_runner, test};
 
-    pub fn do_rsgx_tests() -> usize {
-        run_tests!(compute, index, overflow_count)
-    }
+    generate_runner!();
 
-    //#[test]
+    #[test]
     fn compute() {
         let inputs = [
             "",
@@ -419,7 +417,7 @@ pub mod tests {
         }
     }
 
-    //#[test]
+    #[test]
     fn index() {
         let mut digest = crate::compute(b"abc");
         assert_eq!(digest[0], 0x90);
@@ -427,7 +425,7 @@ pub mod tests {
         assert_eq!(&mut digest[0], &mut 0x90);
     }
 
-    //#[test]
+    #[test]
     fn overflow_count() {
         use std::io::prelude::Write;
         let data = vec![0; 8 * 1024 * 1024];
@@ -441,7 +439,7 @@ pub mod tests {
         );
     }
 
-    #[test]
+    //#[test]
     #[cfg(target_pointer_width = "64")]
     fn overflow_length() {
         use std::io::prelude::Write;
